@@ -23,6 +23,10 @@ export class Song {
   }
 }
 
+export function computeMusicUrl(music) {
+  return `${process.env.VUE_APP_BASE_API_URL}webapi/AudioStation/stream.cgi/0.${music.additional['song_audio']['codec']}?method=stream&api=SYNO.AudioStation.Stream&id=${music.id}&version=2`
+}
+
 export function createSong(music) {
   const album = music.album || music.al || {}
   const duration = music.duration || music.dt

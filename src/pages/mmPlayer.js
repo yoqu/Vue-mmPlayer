@@ -1,4 +1,5 @@
 import { PLAY_MODE } from '@/config'
+import { computeMusicUrl } from '@/utils/song'
 
 // 重试次数
 let retry = 1
@@ -10,7 +11,7 @@ const mmPlayerMusic = {
     ele.onprogress = () => {
       try {
         if (ele.buffered.length > 0) {
-          const duration = that.currentMusic.duration
+          const duration = that.currentMusic.additional.song_audio.duration
           let buffered = 0
           ele.buffered.end(0)
           buffered =
@@ -52,7 +53,7 @@ const mmPlayerMusic = {
         // eslint-disable-next-line no-console
         console.log('重试一次')
         retry -= 1
-        ele.url = that.currentMusic.url
+        ele.url = computeMusicUrl(that.currentMusic)
         ele.load()
       }
       // console.log('播放出错啦！')
